@@ -34,7 +34,7 @@ Outputs are merged into a single R data file (`.rds`) for analysis.
 - **PDFs**: uses Poppler (`pdfinfo` + `pdftoppm`) to render each page to an image, then sends to Ollama `/api/generate` with `images=[base64]`.
 - **Images**: opens via Pillow; may re-encode to PNG/JPEG for sending (configurable).
 
-### Part 3 — Combine results (in `run_pdfscan.R`)
+### Part 3 — Combine results (in `run_textextract.R`)
 - Loads `outputs/llm_output.csv` and `outputs/tesseract_output.csv`
 - Full outer-joins on `filename` + `page_number`
 - Saves `outputs/combined_ocr.rds`
@@ -72,7 +72,7 @@ Part 2 (LLM / Ollama):
 
 1) Download this repository  
    - Click the green **Code** button → **Download ZIP**  
-   - Unzip it (you’ll have a folder named something like `pdfscan`)
+   - Unzip it (you’ll have a folder named something like `textextract`)
 
 2) Install Ollama (the local LLM app)  
    - Download/install: https://ollama.com/download  
@@ -85,9 +85,9 @@ Part 2 (LLM / Ollama):
 4) Open Terminal (you only need to do this once)  
    - Finder → Applications → Utilities → **Terminal**
 
-5) In Terminal: “go into” the pdfscan folder  
+5) In Terminal: “go into” the textextract folder  
    - Type: `cd ` (that’s `cd` plus a space)  
-   - Drag the **pdfscan** folder from Finder into the Terminal window  
+   - Drag the **textextract** folder from Finder into the Terminal window  
    - Press **Return**
 
 6) In Terminal: copy/paste this whole block, then press Return  
@@ -133,12 +133,12 @@ Part 2 (LLM / Ollama):
 
 2) Put your files in the input folder  
    - Copy PDFs and/or images into:
-     - `pdfscan/inputs/`
+     - `textextract/inputs/`
    - Supported: PDFs + common image formats (PNG/JPG/TIFF/etc.)
 
 3) Open the project in RStudio  
    - Open RStudio  
-   - File → Open File… → select `run_pdfscan.R` inside the `pdfscan` folder
+   - File → Open File… → select `run_textextract.R` inside the `textextract` folder
 
 4) Run the script  
    - Click **Source** (top-right of the editor)
@@ -152,9 +152,9 @@ Part 2 (LLM / Ollama):
    - Plan for “start it and let it run” (overnight runs are common), even on a strong computer and even with smaller models.
 
 6) Find your outputs  
-   - `pdfscan/outputs/tesseract_output.csv`  
-   - `pdfscan/outputs/llm_output.csv`  
-   - `pdfscan/outputs/combined_ocr.rds`
+   - `textextract/outputs/tesseract_output.csv`  
+   - `textextract/outputs/llm_output.csv`  
+   - `textextract/outputs/combined_ocr.rds`
 
 7) Load the combined file in R (optional)
 ```r
@@ -164,7 +164,7 @@ head(combined, 3)
 
 8) Common adjustments (if results are poor or it’s too slow)
 - Handwriting / faint scans:
-  - In `run_pdfscan.R` set: `image_format <- "png"` (usually much better than JPEG)
+  - In `run_textextract.R` set: `image_format <- "png"` (usually much better than JPEG)
 - Faster runs on printed documents:
   - Try `dpi <- 120` (PDFs only)
   - Keep `image_format <- "jpeg"` for speed if handwriting isn’t involved
