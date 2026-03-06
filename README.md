@@ -46,7 +46,7 @@ Outputs are merged into a single R data file (`.rds`) for analysis.
 ### Core
 - MacOS (requires some adjustment for Linux/Windows)
 - R (to run the pipeline)
-- Python 3.12+ (recommended: 3.12 or 3.13)
+- Python 3.12+
 - Ollama (local LLM server)
 - Poppler tools: `pdfinfo`, `pdftoppm` (for PDF → image rendering in Part 2)
 - Tesseract OCR engine (system binary) (for Part 1)
@@ -101,7 +101,7 @@ Part 2 (LLM / Ollama):
    fi
 
    # Install system tools needed for PDFs + OCR + Python
-   brew install poppler tesseract python@3.13
+   brew install poppler tesseract python
 
    # Download the Ollama model used for OCR (change if you use a different model)
    ollama pull qwen3-vl:8b # recommended NOT using 8b version without 32gb+ ram.
